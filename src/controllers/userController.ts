@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
+import userModel from "../models/userModel";
 
 class UserController {
-  getUsers(req: Request, res: Response) {
-    res.send("this is user get");
+  async getUsers(req: Request, res: Response) {
+    const users = await userModel.getAllUsers();
+    res.json(users);
+  }
+
+  async addUser(req: Request, res: Response) {
+    const user = await userModel.create(req.body);
+    res.json(user);
   }
 }
 
